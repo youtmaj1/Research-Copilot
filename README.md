@@ -1,118 +1,81 @@
-# Research Copilot �
+# Research Copilot 🔬
 
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](LICENSE)
 [![Python 3.8+](https://img.shields.io/badge/python-3.8+-blue.svg)](https://www.python.org/downloads/)
 [![Docker](https://img.shields.io/badge/docker-ready-blue.svg)](https://www.docker.com/)
 
-A production-ready research assistant powered by RAG (Retrieval-Augmented Generation) with microservices architecture, advanced NLP, comprehensive monitoring, and a web interface.
+Production-ready research assistant powered by RAG (Retrieval-Augmented Generation) with microservices architecture, advanced NLP, comprehensive monitoring, and a web interface.
 
 ## ✨ Features
 
-- **📚 Paper Collection** - Automated collection from ArXiv & Google Scholar with deduplication
-- **🔗 Citation Tracking** - Advanced citation extraction, resolution, and knowledge graphs
-- **❓ Question-Answering** - RAG-powered Q&A with semantic and keyword retrieval
-- **📄 Summarization** - Intelligent document summarization and key point extraction
-- **🏗️ Microservices** - Scalable architecture with independent services (RAG, LLM, Embeddings, Storage)
-- **🔒 Enterprise Security** - JWT authentication, rate limiting, input validation
-- **⚡ High Performance** - Async processing, Redis caching, streaming responses
-- **📊 Monitoring** - Prometheus + Grafana + Loki observability stack
+- **📚 Paper Collection** - Automated collection from ArXiv & Google Scholar
+- **🔗 Citation Tracking** - Advanced citation extraction and analysis
+- **❓ Question-Answering** - RAG-powered Q&A with semantic + keyword retrieval
+- **📄 Summarization** - Intelligent document summarization
+- **🏗️ Microservices** - RAG, LLM, Embeddings, and Storage services
+- **🔒 Security** - JWT auth, rate limiting, input validation
+- **⚡ Performance** - Async processing, Redis caching
+- **📊 Monitoring** - Prometheus, Grafana, Loki observability
 - **🐳 Docker Ready** - Complete containerization with Docker Compose
-- **🌐 Web Interface** - Interactive Streamlit web application
+- **🌐 Web Interface** - Interactive Streamlit application
 
 ## 🚀 Quick Start
 
-### ⚡ Fastest Way (Docker - 5 minutes)
+### ⚡ Fastest Way - Docker (5 minutes)
 
 ```bash
-git clone https://github.com/your-username/research-copilot.git
-cd research-copilot
+git clone https://github.com/youtmaj1/Research-Copilot.git
+cd Research-Copilot
 docker-compose up -d
-# Open: http://localhost:8501
 ```
 
-**See [QUICKSTART.md](QUICKSTART.md) for complete setup options!**
-
-### 🌐 Access Points
+Access:
 - **Web UI:** http://localhost:8501
-- **API Docs:** http://localhost:8000/docs
+- **API:** http://localhost:8000/docs
 - **Monitoring:** http://localhost:3000 (Grafana)
-- **Metrics:** http://localhost:9090 (Prometheus)
 
-**Full setup guides:**
-- 📖 **[QUICKSTART.md](QUICKSTART.md)** - 30-second quick reference
-- 📚 **[UBUNTU_SETUP.md](UBUNTU_SETUP.md)** - Complete Ubuntu/Linux guide
-- 🌐 **[RUN_AS_SERVICE.md](RUN_AS_SERVICE.md)** - Run as service for others to access
-- 🚀 **[DEPLOYMENT.md](DEPLOYMENT.md)** - Production deployment
+### 🐍 Python Setup (Development)
+
+```bash
+python3 -m venv .venv
+source .venv/bin/activate
+pip install -r requirements.txt
+streamlit run app.py
+```
+
+### 🌐 Run on Another Machine
+
+Share with others or run on your Ubuntu server:
+
+```bash
+# Option 1: Docker Compose (Recommended)
+docker-compose up -d
+# Access: http://<your-ip>:8501
+
+# Option 2: ngrok for remote access
+pip install pyngrok
+python -c "from pyngrok import ngrok; print(ngrok.connect(8501))"
+# Share the public URL
+
+# Option 3: systemd service (Ubuntu)
+sudo systemctl start research-copilot
+```
 
 ## 📁 Project Structure
 
 ```
-Research-Copilot/
-├── collector/                 # Paper collection module (ArXiv & Scholar)
-│   ├── arxiv_client.py       # ArXiv API wrapper
-│   ├── scholar_client.py     # Google Scholar scraper
-│   ├── database.py           # Database operations
-│   ├── collector.py          # Main orchestrator
-│   └── cli.py               # Command-line interface
-│
-├── qa/                       # Question-answering system
-│   ├── rag.py               # RAG pipeline with Ollama
-│   ├── retriever.py         # Hybrid retrieval (FAISS + BM25)
-│   ├── query_rewriter.py    # Query enhancement
-│   └── formatter.py         # Multi-format output
-│
-├── services/                 # Microservices (API Gateway pattern)
-│   ├── rag_service.py       # Document retrieval service
-│   ├── llm_service.py       # Language model service
-│   ├── embedding_service.py # Text embedding service
-│   ├── storage_service.py   # Database operations
-│   └── Dockerfile.*         # Service containers
-│
-├── citation_tracker/         # Citation extraction & analysis
-│   ├── extractor.py         # Citation extraction
-│   ├── resolver.py          # Citation resolution
-│   ├── cli.py              # CLI interface
-│   └── tests/              # Unit tests
-│
-├── summarizer/               # Document summarization
-│   ├── summarizer.py        # Summarization engine
-│   └── extractors/          # Text extractors
-│
-├── monitoring/               # Observability stack
-│   ├── prometheus.yml       # Metrics collection
-│   ├── grafana.yml          # Dashboard config
-│   ├── loki.yml             # Log aggregation
-│   └── promtail.yml         # Log forwarding
-│
-├── config/                   # Configuration
-│   ├── production_config.py # Production settings
-│   └── ollama_config.py     # Ollama configuration
-│
-├── examples/                 # Example scripts & demos
-│   ├── interactive_demo.py
-│   ├── research_demo.py
-│   └── simple_demo.py
-│
-├── tests/                    # Test suite
-│   ├── test_collector.py    # Collection tests
-│   ├── test_qa.py          # Q&A tests
-│   ├── performance/        # Performance tests
-│   └── integration/        # Integration tests
-│
-├── docs/                     # Documentation
-│   ├── collector.md         # Collection API
-│   └── qa.md               # Q&A system
-│
-├── data/                     # Data storage
-│   ├── raw/papers/         # Downloaded PDFs
-│   ├── metadata/           # Paper metadata
-│   └── processed/          # Processed data
-│
-├── app.py                   # Streamlit web interface
-├── production_api.py        # FastAPI gateway
-├── docker-compose.yml       # Container orchestration
-├── requirements.txt         # Dependencies
-└── setup.py                # Package setup
+├── collector/               # Paper collection (ArXiv, Scholar)
+├── qa/                     # RAG Q&A system
+├── services/               # Microservices (4 independent services)
+├── citation_tracker/       # Citation extraction & analysis
+├── summarizer/             # Document summarization
+├── app.py                  # Streamlit web UI
+├── production_api.py       # FastAPI gateway
+├── docker-compose.yml      # Container orchestration
+├── examples/               # Demo scripts
+├── tests/                  # Test suite
+├── monitoring/             # Prometheus, Grafana, Loki configs
+└── config/                 # Configuration files
 ```
 
 ## 🔧 Installation
@@ -130,6 +93,176 @@ source .venv/bin/activate
 pip install -r requirements.txt
 streamlit run app.py
 ```
+
+## 🔧 Core Usage
+
+### Paper Collection
+```python
+from collector import PaperCollector
+
+collector = PaperCollector()
+results = collector.search('machine learning', max_results=50)
+```
+
+### RAG Question-Answering
+```python
+from qa import create_rag_pipeline
+
+rag = create_rag_pipeline()
+answer = rag.query("What are transformers in NLP?")
+```
+
+### Extract Citations
+```python
+from citation_tracker import CitationExtractor
+
+extractor = CitationExtractor()
+citations = extractor.extract('paper.pdf')
+```
+
+## 🏗️ Architecture
+
+**Service Ports:**
+- FastAPI Gateway: 8000
+- Streamlit UI: 8501
+- RAG Service: 8001
+- LLM Service: 8002
+- Embedding Service: 8003
+- Storage Service: 8004
+
+**Data Layer:**
+- PostgreSQL: 5432 (paper metadata, vectors)
+- Redis: 6379 (caching, sessions)
+- Ollama: 11434 (local LLM - phi4-mini:3.8b)
+
+**Monitoring:**
+- Prometheus: 9090
+- Grafana: 3000
+- Loki: 3100
+
+## 🧪 Testing
+
+Run tests:
+```bash
+# All tests
+python -m pytest tests/
+
+# Specific test suite
+python -m pytest tests/test_qa.py -v
+
+# With coverage
+pytest --cov=qa tests/
+```
+
+## 🔒 Security
+
+- Credentials stored in `.env.production` (git-ignored)
+- JWT token-based authentication
+- Input validation and sanitization
+- Rate limiting on API endpoints
+- Circuit breaker for service resilience
+
+## 📦 Dependencies
+
+**Core:**
+- FastAPI 0.104.1
+- Streamlit
+- SQLAlchemy
+- asyncpg (PostgreSQL)
+- Redis
+
+**ML/NLP:**
+- Ollama (phi4-mini:3.8b LLM)
+- FAISS (vector search)
+- scikit-learn (BM25 keyword search)
+
+**DevOps:**
+- Docker & Docker Compose
+- Prometheus (metrics)
+- Grafana (dashboards)
+- Loki (logging)
+
+See `requirements.txt` for full dependency list.
+
+## 🌐 Default LLM
+
+- **Model:** Ollama phi4-mini:3.8b
+- **Size:** 3.8 billion parameters
+- **Language:** English
+- **Type:** Lightweight instruction-tuned model
+- **Hardware:** CPU-optimized (no GPU required)
+
+## 📚 Documentation
+
+For detailed setup and deployment guides, refer to:
+- `docs/collector.md` - Paper collection API
+- `docs/qa.md` - Q&A system documentation
+- `examples/` - Demo scripts and usage examples
+
+## 🚀 Production Deployment
+
+```bash
+# Using systemd on Ubuntu
+sudo cp research-copilot.service /etc/systemd/system/
+sudo systemctl enable research-copilot
+sudo systemctl start research-copilot
+
+# Using Docker in production
+docker-compose -f docker-compose.yml up -d
+```
+
+## 📊 Monitoring
+
+Access Grafana dashboard:
+```
+http://localhost:3000
+Username: admin
+Password: admin
+```
+
+Query metrics in Prometheus:
+```
+http://localhost:9090
+```
+
+## 🤝 Contributing
+
+1. Fork the repository
+2. Create your feature branch
+3. Commit your changes
+4. Push to the branch
+5. Open a Pull Request
+
+## 📄 License
+
+MIT License - see LICENSE file for details
+
+## 👨‍💼 Author
+
+Damian - [GitHub](https://github.com/youtmaj1)
+
+## 🆘 Troubleshooting
+
+**Docker not starting?**
+```bash
+docker-compose logs -f
+```
+
+**Port already in use?**
+```bash
+# Change ports in docker-compose.yml or:
+lsof -i :8501
+kill -9 <PID>
+```
+
+**Permission denied on /data?**
+```bash
+sudo chown -R $(whoami):$(whoami) data/
+```
+
+---
+
+**Get started now!** → `docker-compose up -d` then open http://localhost:8501
 
 ## � Core Features
 
