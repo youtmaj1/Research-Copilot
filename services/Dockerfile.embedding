@@ -15,8 +15,7 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
 COPY requirements.embedding.txt .
 RUN pip install --user --no-cache-dir -r requirements.embedding.txt
 
-# Pre-download models to reduce startup time
-RUN python -c "from sentence_transformers import SentenceTransformer; SentenceTransformer('all-MiniLM-L6-v2')"
+# Models will be downloaded on first use (skipped to avoid dependency conflicts)
 
 # Stage 2: Runtime
 FROM python:3.11-slim
@@ -28,9 +27,8 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
     curl \
     && rm -rf /var/lib/apt/lists/*
 
-# Copy Python packages and models from builder
+# Copy Python packages from builder
 COPY --from=builder /root/.local /root/.local
-COPY --from=builder /root/.cache /root/.cache
 
 # Set PATH for pip packages
 ENV PATH=/root/.local/bin:$PATH
