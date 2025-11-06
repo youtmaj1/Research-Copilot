@@ -1,0 +1,28 @@
+{
+  "id": "2510.08572v1",
+  "title": "BLAZER: Bootstrapping LLM-based Manipulation Agents with Zero-Shot Data   Generation",
+  "authors": [
+    "Rocktim Jyoti Das",
+    "Harsh Singh",
+    "Diana Turmakhan",
+    "Muhammad Abdullah Sohail",
+    "Mingfei Han",
+    "Preslav Nakov",
+    "Fabio Pizzati",
+    "Ivan Laptev"
+  ],
+  "abstract": "Scaling data and models has played a pivotal role in the remarkable progress of computer vision and language. Inspired by these domains, recent efforts in robotics have similarly focused on scaling both data and model size to develop more generalizable and robust policies. However, unlike vision and language, robotics lacks access to internet-scale demonstrations across diverse robotic tasks and environments. As a result, the scale of existing datasets typically suffers from the need for manual data collection and curation. To address this problem, here we propose BLAZER, a framework that learns manipulation policies from automatically generated training data. We build on the zero-shot capabilities of LLM planners and automatically generate demonstrations for diverse manipulation tasks in simulation. Successful examples are then used to finetune an LLM and to improve its planning capabilities without human supervision. Notably, while BLAZER training requires access to the simulator's state, we demonstrate direct transfer of acquired skills to sensor-based manipulation. Through extensive experiments, we show BLAZER to significantly improve zero-shot manipulation in both simulated and real environments. Moreover, BLAZER improves on tasks outside of its training pool and enables downscaling of LLM models. Our code and data will be made publicly available on the project page.",
+  "doi": null,
+  "published_date": "2025-10-09T17:59:58+00:00",
+  "updated_date": "2025-10-09T17:59:58+00:00",
+  "categories": [
+    "cs.RO",
+    "cs.AI",
+    "cs.LG"
+  ],
+  "source": "arxiv",
+  "pdf_url": "http://arxiv.org/pdf/2510.08572v1",
+  "arxiv_url": "http://arxiv.org/abs/2510.08572v1",
+  "hash": "b625fdd50497c50792d42386d4455189",
+  "pdf_path": "data/raw/papers/2510.08572v1.pdf"
+}

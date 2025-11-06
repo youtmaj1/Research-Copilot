@@ -1,0 +1,26 @@
+{
+  "id": "2510.08559v1",
+  "title": "SciVideoBench: Benchmarking Scientific Video Reasoning in Large   Multimodal Models",
+  "authors": [
+    "Andong Deng",
+    "Taojiannan Yang",
+    "Shoubin Yu",
+    "Lincoln Spencer",
+    "Mohit Bansal",
+    "Chen Chen",
+    "Serena Yeung-Levy",
+    "Xiaohan Wang"
+  ],
+  "abstract": "Large Multimodal Models (LMMs) have achieved remarkable progress across various capabilities; however, complex video reasoning in the scientific domain remains a significant and challenging frontier. Current video benchmarks predominantly target general scenarios where perception/recognition is heavily relied on, while with relatively simple reasoning tasks, leading to saturation and thus failing to effectively evaluate advanced multimodal cognitive skills. To address this critical gap, we introduce SciVideoBench, a rigorous benchmark specifically designed to assess advanced video reasoning in scientific contexts. SciVideoBench consists of 1,000 carefully crafted multiple-choice questions derived from cutting-edge scientific experimental videos spanning over 25 specialized academic subjects and verified by a semi-automatic system. Each question demands sophisticated domain-specific knowledge, precise spatiotemporal perception, and intricate logical reasoning, effectively challenging models' higher-order cognitive abilities. Our evaluation highlights significant performance deficits in state-of-the-art proprietary and open-source LMMs, including Gemini 2.5 Pro and Qwen2.5-VL, indicating substantial room for advancement in video reasoning capabilities. Detailed analyses of critical factors such as reasoning complexity and visual grounding provide valuable insights and clear direction for future developments in LMMs, driving the evolution of truly capable multimodal AI co-scientists. We hope SciVideoBench could fit the interests of the community and help to push the boundary of cutting-edge AI for border science.",
+  "doi": null,
+  "published_date": "2025-10-09T17:59:23+00:00",
+  "updated_date": "2025-10-09T17:59:23+00:00",
+  "categories": [
+    "cs.CV",
+    "cs.AI"
+  ],
+  "source": "arxiv",
+  "pdf_url": "http://arxiv.org/pdf/2510.08559v1",
+  "arxiv_url": "http://arxiv.org/abs/2510.08559v1",
+  "hash": "d8bff73f9aef3a280bb09d22d920750a"
+}

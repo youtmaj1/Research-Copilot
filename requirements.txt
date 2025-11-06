@@ -1,0 +1,53 @@
+# Main API Gateway Requirements
+fastapi==0.104.1
+uvicorn[standard]==0.24.0
+pydantic==2.5.0
+pydantic-settings==2.1.0
+python-multipart==0.0.6
+
+# Authentication & Security
+python-jose[cryptography]==3.3.0
+passlib[bcrypt]==1.7.4
+
+# Database & Caching
+asyncpg==0.29.0
+redis>=4.5.0
+sqlalchemy[asyncio]==2.0.23
+
+# HTTP Client
+httpx==0.25.2
+
+# Circuit Breaker & Retry
+circuitbreaker==1.4.0
+tenacity==8.2.3
+
+# Logging & Monitoring
+structlog==23.2.0
+prometheus-client==0.19.0
+
+# Background Tasks
+celery==5.3.4
+kombu==5.3.4
+
+# Core dependencies (legacy)
+requests>=2.28.0
+
+# Optional dependencies for Google Scholar scraping
+scholarly>=1.7.0
+
+# Development and testing dependencies
+pytest>=7.0.0
+pytest-cov>=4.0.0
+
+# Logging and utilities
+python-dateutil>=2.8.0
+
+# For better HTTP handling
+urllib3>=1.26.0
+
+# For proxy rotation (optional Scholar enhancement)
+# requests[socks]>=2.28.0
+
+# Documentation generation (optional)
+# sphinx>=5.0.0
+# sphinx-rtd-theme>=1.0.0

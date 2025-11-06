@@ -1,0 +1,25 @@
+{
+  "id": "2510.08564v1",
+  "title": "How to Teach Large Multimodal Models New Skills",
+  "authors": [
+    "Zhen Zhu",
+    "Yiming Gong",
+    "Yao Xiao",
+    "Yaoyao Liu",
+    "Derek Hoiem"
+  ],
+  "abstract": "How can we teach large multimodal models (LMMs) new skills without erasing prior abilities? We study sequential fine-tuning on five target skills while monitoring general ability on eight held-out benchmarks across three model families. We observe that apparent \"forgetting\" on held-out tasks after narrow fine-tuning can partly recover at later stages. We trace this behavior to a measurable shift in the output token distribution, manifested through a simple counting-bias probe that co-varies with forgetting. Guided by this picture, we identify two simple, robust tuning recipes that learn strongly while limiting drift: (i) updating only the self-attention projection layers, and (ii) updating only the MLP Gate&Up while freezing the Down projection. Across models and tasks, these choices deliver strong target gains while largely preserving held-out performance. Code is available at https://github.com/jessemelpolio/LMM_CL",
+  "doi": null,
+  "published_date": "2025-10-09T17:59:37+00:00",
+  "updated_date": "2025-10-09T17:59:37+00:00",
+  "categories": [
+    "cs.AI",
+    "cs.CV",
+    "cs.LG"
+  ],
+  "source": "arxiv",
+  "pdf_url": "http://arxiv.org/pdf/2510.08564v1",
+  "arxiv_url": "http://arxiv.org/abs/2510.08564v1",
+  "hash": "5d7b432736bbf47a50e54ac2d6beab23",
+  "pdf_path": "data/raw/papers/2510.08564v1.pdf"
+}

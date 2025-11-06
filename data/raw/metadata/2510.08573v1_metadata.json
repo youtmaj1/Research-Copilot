@@ -1,0 +1,23 @@
+{
+  "id": "2510.08573v1",
+  "title": "Reconstructing the local density field with combined convolutional and   point cloud architecture",
+  "authors": [
+    "Baptiste Barthe-Gold",
+    "Nhat-Minh Nguyen",
+    "Leander Thiele"
+  ],
+  "abstract": "We construct a neural network to perform regression on the local dark-matter density field given line-of-sight peculiar velocities of dark-matter halos, biased tracers of the dark matter field. Our architecture combines a convolutional U-Net with a point-cloud DeepSets. This combination enables efficient use of small-scale information and improves reconstruction quality relative to a U-Net-only approach. Specifically, our hybrid network recovers both clustering amplitudes and phases better than the U-Net on small scales.",
+  "doi": null,
+  "published_date": "2025-10-09T17:59:58+00:00",
+  "updated_date": "2025-10-09T17:59:58+00:00",
+  "categories": [
+    "astro-ph.CO",
+    "cs.LG",
+    "stat.ML"
+  ],
+  "source": "arxiv",
+  "pdf_url": "http://arxiv.org/pdf/2510.08573v1",
+  "arxiv_url": "http://arxiv.org/abs/2510.08573v1",
+  "hash": "f1bb4f4c7828e5159d772358de208862",
+  "pdf_path": "data/raw/papers/2510.08573v1.pdf"
+}

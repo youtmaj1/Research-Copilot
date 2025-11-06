@@ -1,0 +1,69 @@
+server:
+  http_listen_port: 9080
+  grpc_listen_port: 0
+
+positions:
+  filename: /tmp/positions.yaml
+
+clients:
+  - url: http://loki:3100/loki/api/v1/push
+
+scrape_configs:
+  # Research Copilot application logs
+  - job_name: api-gateway
+    static_configs:
+      - targets:
+          - localhost
+        labels:
+          job: api-gateway
+          service: research-copilot
+          __path__: /var/log/research-copilot/api-gateway.log
+
+  - job_name: storage-service
+    static_configs:
+      - targets:
+          - localhost
+        labels:
+          job: storage-service
+          service: research-copilot
+          __path__: /var/log/research-copilot/storage-service.log
+
+  - job_name: rag-service
+    static_configs:
+      - targets:
+          - localhost
+        labels:
+          job: rag-service
+          service: research-copilot
+          __path__: /var/log/research-copilot/rag-service.log
+
+  - job_name: llm-service
+    static_configs:
+      - targets:
+          - localhost
+        labels:
+          job: llm-service
+          service: research-copilot
+          __path__: /var/log/research-copilot/llm-service.log
+
+  - job_name: embedding-service
+    static_configs:
+      - targets:
+          - localhost
+        labels:
+          job: embedding-service
+          service: research-copilot
+          __path__: /var/log/research-copilot/embedding-service.log
+
+  # Docker container logs
+  - job_name: docker
+    docker_sd_configs:
+      - host: unix:///var/run/docker.sock
+        refresh_interval: 5s
+    relabel_configs:
+      - source_labels: ['__meta_docker_container_label_com_docker_compose_service']
+        target_label: 'service'
+      - source_labels: ['__meta_docker_container_name']
+        target_label: 'container'
+      - source_labels: ['__meta_docker_container_log_stream']
+        target_label: 'stream'

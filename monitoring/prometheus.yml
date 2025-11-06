@@ -1,0 +1,76 @@
+# Prometheus Configuration
+global:
+  scrape_interval: 15s
+  evaluation_interval: 15s
+
+rule_files:
+  - "alert_rules.yml"
+
+alerting:
+  alertmanagers:
+    - static_configs:
+        - targets:
+          - alertmanager:9093
+
+scrape_configs:
+  # Prometheus itself
+  - job_name: 'prometheus'
+    static_configs:
+      - targets: ['localhost:9090']
+
+  # Research Copilot Services
+  - job_name: 'api-gateway'
+    static_configs:
+      - targets: ['api-gateway:8000']
+    metrics_path: '/metrics'
+    scrape_interval: 10s
+
+  - job_name: 'storage-service'
+    static_configs:
+      - targets: ['storage-service:8004']
+    metrics_path: '/metrics'
+    scrape_interval: 10s
+
+  - job_name: 'rag-service'
+    static_configs:
+      - targets: ['rag-service:8001']
+    metrics_path: '/metrics'
+    scrape_interval: 10s
+
+  - job_name: 'llm-service'
+    static_configs:
+      - targets: ['llm-service:8002']
+    metrics_path: '/metrics'
+    scrape_interval: 10s
+
+  - job_name: 'embedding-service'
+    static_configs:
+      - targets: ['embedding-service:8003']
+    metrics_path: '/metrics'
+    scrape_interval: 10s
+
+  # Infrastructure Services
+  - job_name: 'postgres'
+    static_configs:
+      - targets: ['postgres:5432']
+    metrics_path: '/metrics'
+
+  - job_name: 'redis'
+    static_configs:
+      - targets: ['redis:6379']
+    metrics_path: '/metrics'
+
+  - job_name: 'weaviate'
+    static_configs:
+      - targets: ['weaviate:8080']
+    metrics_path: '/v1/metrics'
+
+  # System metrics
+  - job_name: 'node-exporter'
+    static_configs:
+      - targets: ['node-exporter:9100']
+
+  # Docker metrics
+  - job_name: 'cadvisor'
+    static_configs:
+      - targets: ['cadvisor:8080']

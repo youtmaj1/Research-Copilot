@@ -1,0 +1,27 @@
+{
+  "id": "2510.08567v1",
+  "title": "MATRIX: Multimodal Agent Tuning for Robust Tool-Use Reasoning",
+  "authors": [
+    "Tajamul Ashraf",
+    "Umair Nawaz",
+    "Abdelrahman M. Shaker",
+    "Rao Anwer",
+    "Philip Torr",
+    "Fahad Shahbaz Khan",
+    "Salman Khan"
+  ],
+  "abstract": "Vision language models (VLMs) are increasingly deployed as controllers with access to external tools for complex reasoning and decision-making, yet their effectiveness remains limited by the scarcity of high-quality multimodal trajectories and the cost of manual annotation. We address this challenge with a vision-centric agent tuning framework that automatically synthesizes multimodal trajectories, generates step-wise preference pairs, and trains a VLM controller for robust tool-use reasoning. Our pipeline first constructs M-TRACE, a large-scale dataset of 28.5K multimodal tasks with 177K verified trajectories, enabling imitation-based trajectory tuning. Building on this, we develop MATRIX Agent, a controller finetuned on M-TRACE for step-wise tool reasoning. To achieve finer alignment, we further introduce Pref-X, a set of 11K automatically generated preference pairs, and optimize MATRIX on it via step-wise preference learning. Across three benchmarks, Agent-X, GTA, and GAIA, MATRIX consistently surpasses both open- and closed-source VLMs, demonstrating scalable and effective multimodal tool use. Our data and code is avaliable at https://github.com/mbzuai-oryx/MATRIX.",
+  "doi": null,
+  "published_date": "2025-10-09T17:59:54+00:00",
+  "updated_date": "2025-10-09T17:59:54+00:00",
+  "categories": [
+    "cs.CV",
+    "cs.AI",
+    "cs.CL"
+  ],
+  "source": "arxiv",
+  "pdf_url": "http://arxiv.org/pdf/2510.08567v1",
+  "arxiv_url": "http://arxiv.org/abs/2510.08567v1",
+  "hash": "3698e272be6fe31bae85e4a431aa3d45",
+  "pdf_path": "data/raw/papers/2510.08567v1.pdf"
+}

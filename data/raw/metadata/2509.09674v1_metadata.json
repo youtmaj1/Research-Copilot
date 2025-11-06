@@ -1,0 +1,42 @@
+{
+  "id": "2509.09674v1",
+  "title": "SimpleVLA-RL: Scaling VLA Training via Reinforcement Learning",
+  "authors": [
+    "Haozhan Li",
+    "Yuxin Zuo",
+    "Jiale Yu",
+    "Yuhao Zhang",
+    "Zhaohui Yang",
+    "Kaiyan Zhang",
+    "Xuekai Zhu",
+    "Yuchen Zhang",
+    "Tianxing Chen",
+    "Ganqu Cui",
+    "Dehui Wang",
+    "Dingxiang Luo",
+    "Yuchen Fan",
+    "Youbang Sun",
+    "Jia Zeng",
+    "Jiangmiao Pang",
+    "Shanghang Zhang",
+    "Yu Wang",
+    "Yao Mu",
+    "Bowen Zhou",
+    "Ning Ding"
+  ],
+  "abstract": "Vision-Language-Action (VLA) models have recently emerged as a powerful paradigm for robotic manipulation. Despite substantial progress enabled by large-scale pretraining and supervised fine-tuning (SFT), these models face two fundamental challenges: (i) the scarcity and high cost of large-scale human-operated robotic trajectories required for SFT scaling, and (ii) limited generalization to tasks involving distribution shift. Recent breakthroughs in Large Reasoning Models (LRMs) demonstrate that reinforcement learning (RL) can dramatically enhance step-by-step reasoning capabilities, raising a natural question: Can RL similarly improve the long-horizon step-by-step action planning of VLA? In this work, we introduce SimpleVLA-RL, an efficient RL framework tailored for VLA models. Building upon veRL, we introduce VLA-specific trajectory sampling, scalable parallelization, multi-environment rendering, and optimized loss computation. When applied to OpenVLA-OFT, SimpleVLA-RL achieves SoTA performance on LIBERO and even outperforms $\\pi_0$ on RoboTwin 1.0\\&2.0 with the exploration-enhancing strategies we introduce. SimpleVLA-RL not only reduces dependence on large-scale data and enables robust generalization, but also remarkably surpasses SFT in real-world tasks. Moreover, we identify a novel phenomenon ``pushcut'' during RL training, wherein the policy discovers previously unseen patterns beyond those seen in the previous training process. Github: https://github.com/PRIME-RL/SimpleVLA-RL",
+  "doi": null,
+  "published_date": "2025-09-11T17:59:17+00:00",
+  "updated_date": "2025-09-11T17:59:17+00:00",
+  "categories": [
+    "cs.RO",
+    "cs.AI",
+    "cs.CL",
+    "cs.LG"
+  ],
+  "source": "arxiv",
+  "pdf_url": "http://arxiv.org/pdf/2509.09674v1",
+  "arxiv_url": "http://arxiv.org/abs/2509.09674v1",
+  "hash": "d994a21358097534a78ed5a1ae7fb5fc",
+  "pdf_path": "data/raw/papers/2509.09674v1.pdf"
+}

@@ -1,0 +1,22 @@
+{
+  "id": "2510.08571v1",
+  "title": "Scalable Offline Metrics for Autonomous Driving",
+  "authors": [
+    "Animikh Aich",
+    "Adwait Kulkarni",
+    "Eshed Ohn-Bar"
+  ],
+  "abstract": "Real-World evaluation of perception-based planning models for robotic systems, such as autonomous vehicles, can be safely and inexpensively conducted offline, i.e., by computing model prediction error over a pre-collected validation dataset with ground-truth annotations. However, extrapolating from offline model performance to online settings remains a challenge. In these settings, seemingly minor errors can compound and result in test-time infractions or collisions. This relationship is understudied, particularly across diverse closed-loop metrics and complex urban maneuvers. In this work, we revisit this undervalued question in policy evaluation through an extensive set of experiments across diverse conditions and metrics. Based on analysis in simulation, we find an even worse correlation between offline and online settings than reported by prior studies, casting doubts on the validity of current evaluation practices and metrics for driving policies. Next, we bridge the gap between offline and online evaluation. We investigate an offline metric based on epistemic uncertainty, which aims to capture events that are likely to cause errors in closed-loop settings. The resulting metric achieves over 13% improvement in correlation compared to previous offline metrics. We further validate the generalization of our findings beyond the simulation environment in real-world settings, where even greater gains are observed.",
+  "doi": null,
+  "published_date": "2025-10-09T17:59:57+00:00",
+  "updated_date": "2025-10-09T17:59:57+00:00",
+  "categories": [
+    "cs.RO",
+    "cs.CV"
+  ],
+  "source": "arxiv",
+  "pdf_url": "http://arxiv.org/pdf/2510.08571v1",
+  "arxiv_url": "http://arxiv.org/abs/2510.08571v1",
+  "hash": "493ca0f0344850311bb45616d14a87e9",
+  "pdf_path": "data/raw/papers/2510.08571v1.pdf"
+}

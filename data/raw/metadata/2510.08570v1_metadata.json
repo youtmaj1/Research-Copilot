@@ -1,0 +1,21 @@
+{
+  "id": "2510.08570v1",
+  "title": "Who Said Neural Networks Aren't Linear?",
+  "authors": [
+    "Nimrod Berman",
+    "Assaf Hallak",
+    "Assaf Shocher"
+  ],
+  "abstract": "Neural networks are famously nonlinear. However, linearity is defined relative to a pair of vector spaces, $f$$:$$X$$\\to$$Y$. Is it possible to identify a pair of non-standard vector spaces for which a conventionally nonlinear function is, in fact, linear? This paper introduces a method that makes such vector spaces explicit by construction. We find that if we sandwich a linear operator $A$ between two invertible neural networks, $f(x)=g_y^{-1}(A g_x(x))$, then the corresponding vector spaces $X$ and $Y$ are induced by newly defined addition and scaling actions derived from $g_x$ and $g_y$. We term this kind of architecture a Linearizer. This framework makes the entire arsenal of linear algebra, including SVD, pseudo-inverse, orthogonal projection and more, applicable to nonlinear mappings. Furthermore, we show that the composition of two Linearizers that share a neural network is also a Linearizer. We leverage this property and demonstrate that training diffusion models using our architecture makes the hundreds of sampling steps collapse into a single step. We further utilize our framework to enforce idempotency (i.e. $f(f(x))=f(x)$) on networks leading to a globally projective generative model and to demonstrate modular style transfer.",
+  "doi": null,
+  "published_date": "2025-10-09T17:59:57+00:00",
+  "updated_date": "2025-10-09T17:59:57+00:00",
+  "categories": [
+    "cs.LG"
+  ],
+  "source": "arxiv",
+  "pdf_url": "http://arxiv.org/pdf/2510.08570v1",
+  "arxiv_url": "http://arxiv.org/abs/2510.08570v1",
+  "hash": "9c4903f87325a341fea608ccc404004c",
+  "pdf_path": "data/raw/papers/2510.08570v1.pdf"
+}

@@ -1,0 +1,27 @@
+{
+  "id": "2510.08568v1",
+  "title": "NovaFlow: Zero-Shot Manipulation via Actionable Flow from Generated   Videos",
+  "authors": [
+    "Hongyu Li",
+    "Lingfeng Sun",
+    "Yafei Hu",
+    "Duy Ta",
+    "Jennifer Barry",
+    "George Konidaris",
+    "Jiahui Fu"
+  ],
+  "abstract": "Enabling robots to execute novel manipulation tasks zero-shot is a central goal in robotics. Most existing methods assume in-distribution tasks or rely on fine-tuning with embodiment-matched data, limiting transfer across platforms. We present NovaFlow, an autonomous manipulation framework that converts a task description into an actionable plan for a target robot without any demonstrations. Given a task description, NovaFlow synthesizes a video using a video generation model and distills it into 3D actionable object flow using off-the-shelf perception modules. From the object flow, it computes relative poses for rigid objects and realizes them as robot actions via grasp proposals and trajectory optimization. For deformable objects, this flow serves as a tracking objective for model-based planning with a particle-based dynamics model. By decoupling task understanding from low-level control, NovaFlow naturally transfers across embodiments. We validate on rigid, articulated, and deformable object manipulation tasks using a table-top Franka arm and a Spot quadrupedal mobile robot, and achieve effective zero-shot execution without demonstrations or embodiment-specific training. Project website: https://novaflow.lhy.xyz/.",
+  "doi": null,
+  "published_date": "2025-10-09T17:59:55+00:00",
+  "updated_date": "2025-10-09T17:59:55+00:00",
+  "categories": [
+    "cs.RO",
+    "cs.AI",
+    "cs.CV"
+  ],
+  "source": "arxiv",
+  "pdf_url": "http://arxiv.org/pdf/2510.08568v1",
+  "arxiv_url": "http://arxiv.org/abs/2510.08568v1",
+  "hash": "b51614be31af8a5fd5c1ac60798c8105",
+  "pdf_path": "data/raw/papers/2510.08568v1.pdf"
+}

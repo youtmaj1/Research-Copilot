@@ -1,0 +1,302 @@
+# Research Copilot - Production Infrastructure
+# Docker Compose for Microservices Architecture
+
+version: '3.8'
+
+services:
+  # Databases
+  postgres:
+    image: postgres:15
+    environment:
+      POSTGRES_DB: research_copilot
+      POSTGRES_USER: research_user
+      POSTGRES_PASSWORD: research_password
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+      - ./init.sql:/docker-entrypoint-initdb.d/init.sql
+    ports:
+      - "5432:5432"
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U research_user -d research_copilot"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+    networks:
+      - research_net
+
+  # Redis for caching and sessions
+  redis:
+    image: redis:7-alpine
+    command: redis-server --appendonly yes --requirepass research_redis_pass
+    volumes:
+      - redis_data:/data
+    ports:
+      - "6379:6379"
+    healthcheck:
+      test: ["CMD", "redis-cli", "--raw", "incr", "ping"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+    networks:
+      - research_net
+
+  # Vector Database (Weaviate)
+  weaviate:
+    image: semitechnologies/weaviate:1.21.2
+    environment:
+      QUERY_DEFAULTS_LIMIT: 25
+      AUTHENTICATION_ANONYMOUS_ACCESS_ENABLED: 'false'
+      AUTHENTICATION_APIKEY_ENABLED: 'true'
+      AUTHENTICATION_APIKEY_ALLOWED_KEYS: 'research-copilot-key'
+      AUTHENTICATION_APIKEY_USERS: 'research-user'
+      PERSISTENCE_DATA_PATH: '/var/lib/weaviate'
+      DEFAULT_VECTORIZER_MODULE: 'none'
+      ENABLE_MODULES: 'text2vec-transformers,generative-openai'
+      CLUSTER_HOSTNAME: 'node1'
+    volumes:
+      - weaviate_data:/var/lib/weaviate
+    ports:
+      - "8080:8080"
+    networks:
+      - research_net
+
+  # Message Queue (RabbitMQ)
+  rabbitmq:
+    image: rabbitmq:3.11-management
+    environment:
+      RABBITMQ_DEFAULT_USER: research_user
+      RABBITMQ_DEFAULT_PASS: research_password
+    volumes:
+      - rabbitmq_data:/var/lib/rabbitmq
+    ports:
+      - "5672:5672"
+      - "15672:15672"  # Management UI
+    healthcheck:
+      test: ["CMD", "rabbitmq-diagnostics", "check_port_connectivity"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+    networks:
+      - research_net
+
+  # Note: Using local Ollama instance at localhost:11434
+  # ollama:
+  #   image: ollama/ollama:latest
+  #   volumes:
+  #     - ollama_data:/root/.ollama
+  #   ports:
+  #     - "11434:11434"
+  #   environment:
+  #     - OLLAMA_HOST=0.0.0.0
+  #   networks:
+  #     - research_net
+
+  # Microservices
+  storage-service:
+    build:
+      context: .
+      dockerfile: services/Dockerfile.storage
+    environment:
+      - DATABASE_URL=postgresql://research_user:research_password@postgres:5432/research_copilot
+      - REDIS_URL=redis://:research_redis_pass@redis:6379
+    depends_on:
+      postgres:
+        condition: service_healthy
+      redis:
+        condition: service_healthy
+    ports:
+      - "8004:8004"
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:8004/health"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+    networks:
+      - research_net
+
+  embedding-service:
+    build:
+      context: .
+      dockerfile: services/Dockerfile.embedding
+    environment:
+      - REDIS_URL=redis://:research_redis_pass@redis:6379
+      - CUDA_VISIBLE_DEVICES=0
+    depends_on:
+      redis:
+        condition: service_healthy
+    ports:
+      - "8003:8003"
+    deploy:
+      resources:
+        reservations:
+          devices:
+            - driver: nvidia
+              count: 1
+              capabilities: [gpu]
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:8003/health"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+    networks:
+      - research_net
+
+  llm-service:
+    build:
+      context: .
+      dockerfile: services/Dockerfile.llm
+    environment:
+      - OLLAMA_BASE_URL=http://host.docker.internal:11434
+      - REDIS_URL=redis://:research_redis_pass@redis:6379
+    depends_on:
+      - redis
+    ports:
+      - "8002:8002"
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:8002/health"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+    networks:
+      - research_net
+    extra_hosts:
+      - "host.docker.internal:host-gateway"
+
+  rag-service:
+    build:
+      context: .
+      dockerfile: services/Dockerfile.rag
+    environment:
+      - DATABASE_URL=postgresql://research_user:research_password@postgres:5432/research_copilot
+      - REDIS_URL=redis://:research_redis_pass@redis:6379
+      - EMBEDDING_SERVICE_URL=http://embedding-service:8003
+      - WEAVIATE_URL=http://weaviate:8080
+      - WEAVIATE_API_KEY=research-copilot-key
+    depends_on:
+      postgres:
+        condition: service_healthy
+      redis:
+        condition: service_healthy
+      embedding-service:
+        condition: service_healthy
+    ports:
+      - "8001:8001"
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:8001/health"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+    networks:
+      - research_net
+
+  # Main API Gateway
+  api-gateway:
+    build:
+      context: .
+      dockerfile: Dockerfile.api
+    environment:
+      - REDIS_URL=redis://:research_redis_pass@redis:6379
+      - STORAGE_SERVICE_URL=http://storage-service:8004
+      - RAG_SERVICE_URL=http://rag-service:8001
+      - LLM_SERVICE_URL=http://llm-service:8002
+      - EMBEDDING_SERVICE_URL=http://embedding-service:8003
+      - JWT_SECRET_KEY=${JWT_SECRET_KEY:-your-secret-key-change-in-production}
+    depends_on:
+      storage-service:
+        condition: service_healthy
+      rag-service:
+        condition: service_healthy
+      llm-service:
+        condition: service_healthy
+      embedding-service:
+        condition: service_healthy
+    ports:
+      - "8000:8000"
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:8000/health"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+    networks:
+      - research_net
+
+  # Monitoring Stack
+  prometheus:
+    image: prom/prometheus:latest
+    volumes:
+      - ./monitoring/prometheus.yml:/etc/prometheus/prometheus.yml
+      - prometheus_data:/prometheus
+    command:
+      - '--config.file=/etc/prometheus/prometheus.yml'
+      - '--storage.tsdb.path=/prometheus'
+      - '--web.console.libraries=/etc/prometheus/console_libraries'
+      - '--web.console.templates=/etc/prometheus/consoles'
+      - '--storage.tsdb.retention.time=200h'
+      - '--web.enable-lifecycle'
+    ports:
+      - "9090:9090"
+    networks:
+      - research_net
+
+  grafana:
+    image: grafana/grafana:latest
+    environment:
+      - GF_SECURITY_ADMIN_USER=admin
+      - GF_SECURITY_ADMIN_PASSWORD=admin
+      - GF_USERS_ALLOW_SIGN_UP=false
+    volumes:
+      - grafana_data:/var/lib/grafana
+      - ./monitoring/grafana/provisioning:/etc/grafana/provisioning
+    ports:
+      - "3000:3000"
+    networks:
+      - research_net
+
+  # Log aggregation
+  loki:
+    image: grafana/loki:latest
+    command: -config.file=/etc/loki/local-config.yaml
+    ports:
+      - "3100:3100"
+    volumes:
+      - loki_data:/loki
+    networks:
+      - research_net
+
+  promtail:
+    image: grafana/promtail:latest
+    command: -config.file=/etc/promtail/config.yml
+    volumes:
+      - ./monitoring/promtail.yml:/etc/promtail/config.yml
+      - /var/log:/var/log:ro
+      - /var/lib/docker/containers:/var/lib/docker/containers:ro
+    networks:
+      - research_net
+
+  # Reverse Proxy
+  nginx:
+    image: nginx:alpine
+    volumes:
+      - ./nginx/nginx.conf:/etc/nginx/nginx.conf
+      - ./nginx/ssl:/etc/nginx/ssl
+    ports:
+      - "80:80"
+      - "443:443"
+    depends_on:
+      - api-gateway
+      - grafana
+    networks:
+      - research_net
+
+volumes:
+  postgres_data:
+  redis_data:
+  weaviate_data:
+  rabbitmq_data:
+  prometheus_data:
+  grafana_data:
+  loki_data:
+
+networks:
+  research_net:
+    driver: bridge

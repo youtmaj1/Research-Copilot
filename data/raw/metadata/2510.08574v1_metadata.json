@@ -1,0 +1,21 @@
+{
+  "id": "2510.08574v1",
+  "title": "Fragmentation-limited dust filtration in 2D simulations of planet-disk   systems with dust coagulation. Parameter study and implications for the inner   disk's dust mass budget and composition",
+  "authors": [
+    "Thomas Pfeil",
+    "Philip J. Armitage",
+    "Yan-Fei Jiang"
+  ],
+  "abstract": "Super-thermal gas giant planets or their progenitor cores are known to open deep gaps in protoplanetary disks, which stop large, drifting dust particles on their way to the inner disk. The possible separation of the disk into distinct reservoirs and the resulting dust depletion interior to the gap have important implications for planetesimal formation and the chemical and isotopic composition of the inner regions of protoplanetary disks. Dust fragmentation, however, maintains a reservoir of small grains which can traverse the gap. Dust evolution models are thus instrumental for studies of a gap's filtration efficiency. We present 2D multifluid hydrodynamic simulations of planet-disk systems with dust coagulation and fragmentation. For the first time, we evolve a series of 2D simulation with dust coagulation over 45000 planetary orbits and track the dust's size evolution and origin by using the TriPoD dust coagulation method. We investigate the effects of different planetary masses, fragmentation velocities, and viscosities on the inner disk's dust mass budget and composition, and highlight the advantages of multi-dimensional simulations over 1D models. Filtering can only be efficient for high planetary masses, high fragmentation velocities, and low diffusivities. Clear compositional distinctions between the inner and outer disk could not have been maintained by Jupiter's core if the fragmentation velocity was low, even if $\\alpha \\lesssim 5 \\times 10^{-4}$. Significant \"contamination\" of the inner disk by outer-disk dust occurs in much less than $2 \\times 10^5$ yr in this case and even for more massive objects. This either places tight constraints on the physical conditions in the Solar nebula or mandates consideration of alternative explanations for the NC-CC dichotomy. Astrophysical constraints on the parameters could discriminate between these possibilities.",
+  "doi": null,
+  "published_date": "2025-10-09T17:59:59+00:00",
+  "updated_date": "2025-10-09T17:59:59+00:00",
+  "categories": [
+    "astro-ph.EP"
+  ],
+  "source": "arxiv",
+  "pdf_url": "http://arxiv.org/pdf/2510.08574v1",
+  "arxiv_url": "http://arxiv.org/abs/2510.08574v1",
+  "hash": "c1a5a492acdb2c659fa83e2bf4acd317",
+  "pdf_path": "data/raw/papers/2510.08574v1.pdf"
+}

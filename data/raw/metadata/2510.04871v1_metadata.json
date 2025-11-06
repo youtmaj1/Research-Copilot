@@ -1,0 +1,20 @@
+{
+  "id": "2510.04871v1",
+  "title": "Less is More: Recursive Reasoning with Tiny Networks",
+  "authors": [
+    "Alexia Jolicoeur-Martineau"
+  ],
+  "abstract": "Hierarchical Reasoning Model (HRM) is a novel approach using two small neural networks recursing at different frequencies. This biologically inspired method beats Large Language models (LLMs) on hard puzzle tasks such as Sudoku, Maze, and ARC-AGI while trained with small models (27M parameters) on small data (around 1000 examples). HRM holds great promise for solving hard problems with small networks, but it is not yet well understood and may be suboptimal. We propose Tiny Recursive Model (TRM), a much simpler recursive reasoning approach that achieves significantly higher generalization than HRM, while using a single tiny network with only 2 layers. With only 7M parameters, TRM obtains 45% test-accuracy on ARC-AGI-1 and 8% on ARC-AGI-2, higher than most LLMs (e.g., Deepseek R1, o3-mini, Gemini 2.5 Pro) with less than 0.01% of the parameters.",
+  "doi": null,
+  "published_date": "2025-10-06T14:58:08+00:00",
+  "updated_date": "2025-10-06T14:58:08+00:00",
+  "categories": [
+    "cs.LG",
+    "cs.AI"
+  ],
+  "source": "arxiv",
+  "pdf_url": "http://arxiv.org/pdf/2510.04871v1",
+  "arxiv_url": "http://arxiv.org/abs/2510.04871v1",
+  "hash": "06f907c2718eede607caf72a6780243d",
+  "pdf_path": "data/raw/papers/2510.04871v1.pdf"
+}

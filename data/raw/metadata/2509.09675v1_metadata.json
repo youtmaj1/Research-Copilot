@@ -1,0 +1,30 @@
+{
+  "id": "2509.09675v1",
+  "title": "CDE: Curiosity-Driven Exploration for Efficient Reinforcement Learning   in Large Language Models",
+  "authors": [
+    "Runpeng Dai",
+    "Linfeng Song",
+    "Haolin Liu",
+    "Zhenwen Liang",
+    "Dian Yu",
+    "Haitao Mi",
+    "Zhaopeng Tu",
+    "Rui Liu",
+    "Tong Zheng",
+    "Hongtu Zhu",
+    "Dong Yu"
+  ],
+  "abstract": "Reinforcement Learning with Verifiable Rewards (RLVR) is a powerful paradigm for enhancing the reasoning ability of Large Language Models (LLMs). Yet current RLVR methods often explore poorly, leading to premature convergence and entropy collapse. To address this challenge, we introduce Curiosity-Driven Exploration (CDE), a framework that leverages the model's own intrinsic sense of curiosity to guide exploration. We formalize curiosity with signals from both the actor and the critic: for the actor, we use perplexity over its generated response, and for the critic, we use the variance of value estimates from a multi-head architecture. Both signals serve as an exploration bonus within the RLVR framework to guide the model. Our theoretical analysis shows that the actor-wise bonus inherently penalizes overconfident errors and promotes diversity among correct responses; moreover, we connect the critic-wise bonus to the well-established count-based exploration bonus in RL. Empirically, our method achieves an approximate +3 point improvement over standard RLVR using GRPO/PPO on AIME benchmarks. Further analysis identifies a calibration collapse mechanism within RLVR, shedding light on common LLM failure modes.",
+  "doi": null,
+  "published_date": "2025-09-11T17:59:17+00:00",
+  "updated_date": "2025-09-11T17:59:17+00:00",
+  "categories": [
+    "cs.CL",
+    "cs.AI",
+    "cs.LG"
+  ],
+  "source": "arxiv",
+  "pdf_url": "http://arxiv.org/pdf/2509.09675v1",
+  "arxiv_url": "http://arxiv.org/abs/2509.09675v1",
+  "hash": "9ce9c18183fa53a0a063062203d735cb"
+}

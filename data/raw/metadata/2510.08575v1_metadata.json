@@ -1,0 +1,22 @@
+{
+  "id": "2510.08575v1",
+  "title": "ReSplat: Learning Recurrent Gaussian Splats",
+  "authors": [
+    "Haofei Xu",
+    "Daniel Barath",
+    "Andreas Geiger",
+    "Marc Pollefeys"
+  ],
+  "abstract": "While feed-forward Gaussian splatting models provide computational efficiency and effectively handle sparse input settings, their performance is fundamentally limited by the reliance on a single forward pass during inference. We propose ReSplat, a feed-forward recurrent Gaussian splatting model that iteratively refines 3D Gaussians without explicitly computing gradients. Our key insight is that the Gaussian splatting rendering error serves as a rich feedback signal, guiding the recurrent network to learn effective Gaussian updates. This feedback signal naturally adapts to unseen data distributions at test time, enabling robust generalization. To initialize the recurrent process, we introduce a compact reconstruction model that operates in a $16 \\times$ subsampled space, producing $16 \\times$ fewer Gaussians than previous per-pixel Gaussian models. This substantially reduces computational overhead and allows for efficient Gaussian updates. Extensive experiments across varying of input views (2, 8, 16), resolutions ($256 \\times 256$ to $540 \\times 960$), and datasets (DL3DV and RealEstate10K) demonstrate that our method achieves state-of-the-art performance while significantly reducing the number of Gaussians and improving the rendering speed. Our project page is at https://haofeixu.github.io/resplat/.",
+  "doi": null,
+  "published_date": "2025-10-09T17:59:59+00:00",
+  "updated_date": "2025-10-09T17:59:59+00:00",
+  "categories": [
+    "cs.CV"
+  ],
+  "source": "arxiv",
+  "pdf_url": "http://arxiv.org/pdf/2510.08575v1",
+  "arxiv_url": "http://arxiv.org/abs/2510.08575v1",
+  "hash": "5967604af29692cbc1de195ba0e938a6",
+  "pdf_path": "data/raw/papers/2510.08575v1.pdf"
+}

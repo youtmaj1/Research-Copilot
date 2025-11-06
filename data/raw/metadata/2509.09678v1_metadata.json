@@ -1,0 +1,23 @@
+{
+  "id": "2509.09678v1",
+  "title": "Cosmic $τ$ensions Indirectly Correlate with Reionization Optical   Depth",
+  "authors": [
+    "Itamar J. Allali",
+    "Lingfeng Li",
+    "Praniti Singh",
+    "JiJi Fan"
+  ],
+  "abstract": "The reionization optical depth $\\tau_{\\rm reio}$ has interesting connections to existing cosmological anomalies. As first studied in the context of the Hubble tension in our previous paper, a larger $\\tau_{\\rm reio}$, which could be achieved by removing the Planck low-$\\ell$ polarization data, could boost $H_0$ slightly, resulting in a mild reduction of the tension between the early- and late-universe determinations of $H_0$. It has been shown later that a larger $\\tau_{\\rm reio}$ could also relieve other anomalies including: the tension between BAO and CMB data, the neutrino mass tension, and the latest DESI plus supernovae data's tension with the standard cosmological constant scenario. In this paper, we systematically analyze the correlations between $\\tau_{\\rm reio}$ and relevant cosmological parameters in the existing cosmic observation anomalies. In addition to Pearson correlation coefficients extracted directly from the covariance matrix, we also study partial correlation coefficients which measure intrinsic relationships between pairs of parameters removing the influence of other parameters. We show that $\\tau_{\\rm reio}$ has weak intrinsic correlations with the parameters responsible for the tensions and anomalies discussed. The large direct Pearson correlations that allow larger $\\tau_{\\rm reio}$ inferences to alleviate the cosmological tensions each arise from complicated networks through multiple parameters. As a result, the relationships between $\\tau_{\\rm reio}$ and each anomaly are not independent of each other. We also employ our method of computing correlations to clarify the impact of large scale polarization data, and comment also on the effects of CMB observations from ACT and SPT.",
+  "doi": null,
+  "published_date": "2025-09-11T17:59:46+00:00",
+  "updated_date": "2025-09-11T17:59:46+00:00",
+  "categories": [
+    "astro-ph.CO",
+    "hep-ph"
+  ],
+  "source": "arxiv",
+  "pdf_url": "http://arxiv.org/pdf/2509.09678v1",
+  "arxiv_url": "http://arxiv.org/abs/2509.09678v1",
+  "hash": "f4986f834c0d203d20841716e6ba8d48",
+  "pdf_path": "data/raw/papers/2509.09678v1.pdf"
+}
