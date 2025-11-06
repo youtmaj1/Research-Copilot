@@ -228,7 +228,7 @@ services:
     working_dir: /app
     volumes:
       - .:/app
-    command: pip install streamlit && streamlit run app.py --server.port=8501 --server.address=0.0.0.0
+    command: sh -c "pip install streamlit && streamlit run app.py --server.port=8501 --server.address=0.0.0.0"
     environment:
       API_URL: http://api-gateway:8000
     depends_on:
