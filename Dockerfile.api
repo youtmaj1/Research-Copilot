@@ -1,21 +1,34 @@
-# Main API Gateway Dockerfile
-FROM python:3.11-slim
+# Multi-stage build for optimized image size
+# Stage 1: Build
+FROM python:3.11-slim AS builder
 
-# Set working directory
-WORKDIR /app
+WORKDIR /tmp
 
-# Install system dependencies
-RUN apt-get update && apt-get install -y \
+# Install build dependencies
+RUN apt-get update && apt-get install -y --no-install-recommends \
     gcc \
     g++ \
+    && rm -rf /var/lib/apt/lists/*
+
+# Copy and install requirements
+COPY requirements.txt .
+RUN pip install --user --no-cache-dir -r requirements.txt
+
+# Stage 2: Runtime
+FROM python:3.11-slim
+
+WORKDIR /app
+
+# Install only runtime dependencies
+RUN apt-get update && apt-get install -y --no-install-recommends \
     curl \
     && rm -rf /var/lib/apt/lists/*
 
-# Copy requirements
-COPY requirements.txt .
+# Copy Python packages from builder
+COPY --from=builder /root/.local /root/.local
 
-# Install Python dependencies
-RUN pip install --no-cache-dir -r requirements.txt
+# Set PATH for pip packages
+ENV PATH=/root/.local/bin:$PATH
 
 # Copy application code
 COPY production_api.py .

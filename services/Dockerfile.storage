@@ -1,20 +1,35 @@
-# Storage Service Dockerfile
+# Multi-stage build for optimized image size
+# Stage 1: Build
+FROM python:3.11-slim AS builder
+
+WORKDIR /tmp
+
+# Install build dependencies
+RUN apt-get update && apt-get install -y --no-install-recommends \
+    gcc \
+    libpq-dev \
+    && rm -rf /var/lib/apt/lists/*
+
+# Copy and install requirements
+COPY requirements.storage.txt .
+RUN pip install --user --no-cache-dir -r requirements.storage.txt
+
+# Stage 2: Runtime
 FROM python:3.11-slim
 
 WORKDIR /app
 
-# Install system dependencies
-RUN apt-get update && apt-get install -y \
-    gcc \
-    libpq-dev \
+# Install only runtime dependencies
+RUN apt-get update && apt-get install -y --no-install-recommends \
     curl \
+    libpq5 \
     && rm -rf /var/lib/apt/lists/*
 
-# Copy requirements
-COPY requirements.storage.txt .
+# Copy Python packages from builder
+COPY --from=builder /root/.local /root/.local
 
-# Install Python dependencies
-RUN pip install --no-cache-dir -r requirements.storage.txt
+# Set PATH for pip packages
+ENV PATH=/root/.local/bin:$PATH
 
 # Copy service code
 COPY services/storage_service.py .

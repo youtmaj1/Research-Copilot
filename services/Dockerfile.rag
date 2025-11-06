@@ -1,21 +1,36 @@
-# RAG Service Dockerfile
+# Multi-stage build for optimized image size
+# Stage 1: Build
+FROM python:3.11-slim AS builder
+
+WORKDIR /tmp
+
+# Install build dependencies
+RUN apt-get update && apt-get install -y --no-install-recommends \
+    gcc \
+    g++ \
+    libpq-dev \
+    && rm -rf /var/lib/apt/lists/*
+
+# Copy and install requirements
+COPY requirements.rag.txt .
+RUN pip install --user --no-cache-dir -r requirements.rag.txt
+
+# Stage 2: Runtime
 FROM python:3.11-slim
 
 WORKDIR /app
 
-# Install system dependencies
-RUN apt-get update && apt-get install -y \
-    gcc \
-    g++ \
-    libpq-dev \
+# Install only runtime dependencies
+RUN apt-get update && apt-get install -y --no-install-recommends \
     curl \
+    libpq5 \
     && rm -rf /var/lib/apt/lists/*
 
-# Copy requirements
-COPY requirements.rag.txt .
+# Copy Python packages from builder
+COPY --from=builder /root/.local /root/.local
 
-# Install Python dependencies
-RUN pip install --no-cache-dir -r requirements.rag.txt
+# Set PATH for pip packages
+ENV PATH=/root/.local/bin:$PATH
 
 # Copy service code
 COPY services/rag_service.py .
